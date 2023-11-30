@@ -20,9 +20,10 @@ async def send_battle_notification(bot: Bot):
             .options(selectinload(Battle.for_user))
             .where(Battle.date == get_nearest_day(), Battle.hour == hour)
         )
-        if result is None:
-            return
-        if result.for_user is None:
-            return
-        username = result.for_user.username
+        if result is None or result.for_user is None:
+            username = None
+        else:
+            username = result.for_user.username
+    if username is None:
+        await bot.send_message(-1001598872748, f'Стоило бы занять битву.')
     await bot.send_message(-1001598872748, f'Привет, @{username}.')
