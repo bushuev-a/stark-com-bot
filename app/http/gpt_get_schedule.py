@@ -1,4 +1,5 @@
 from aiohttp.web_request import Request
+ from aiohttp.web_response import Response
 from babel.dates import format_date
 
 # TODO move somewhere elso
@@ -19,4 +20,4 @@ async def http_get_schedule(_: Request):
         schedule.append(f'в {battle.hour}:00 - {user}')
     schedule_text = '\n'.join(schedule)
     date_string = format_date(day, 'full', locale='ru_RU')
-    return f'Расписание на {date_string}\n{schedule_text}'
+    return Response(body=f'Расписание на {date_string}\n{schedule_text}')
