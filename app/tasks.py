@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from sqlalchemy import select
@@ -7,6 +8,10 @@ from sqlalchemy.orm import selectinload
 from app.db import AsyncSessionLocal
 from app.models import Battle
 from app.utils.time import get_nearest_day
+
+
+WEBHOOK_URL = os.getenv('WEBHOOK_URL')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 
 async def send_battle_notification(bot: Bot):
@@ -29,3 +34,8 @@ async def send_battle_notification(bot: Bot):
     if username is None:
         await bot.send_message(-1001598872748, f'Стоило бы занять битву.')
     await bot.send_message(-1001598872748, f'Привет, @{username}.')
+
+
+async def on_startup(bot: Bot):
+    await bot.delete_webhook(True)
+    await bot.set_webhook(WEBHOOK_URL, secret_token=BOT_TOKEN)
