@@ -48,7 +48,7 @@ def main():
 
     # Mount dispatcher startup and shutdown hooks to aiohttp application
     setup_application(app, dp, bot=bot)
-    app.get('/my-gpt/schedule', http_get_schedule)
+    app.router.add_get('/my-gpt/schedule', http_get_schedule)
     web.run_app(app, port=8006, loop=loop)
 
 
