@@ -12,13 +12,15 @@ from app.utils.time import get_nearest_day
 async def send_battle_notification(bot: Bot):
     now = datetime.now()
     hour = 10
+    day = get_nearest_day()
     if now.hour >= 10 and now.hour < 22:
         hour = now.hour + 3
+        day = now.date()
     async with AsyncSessionLocal() as session:
         result = await session.scalar(
             select(Battle)
             .options(selectinload(Battle.for_user))
-            .where(Battle.date == get_nearest_day(), Battle.hour == hour)
+            .where(Battle.date == day, Battle.hour == hour)
         )
         if result is None or result.for_user is None:
             username = None
