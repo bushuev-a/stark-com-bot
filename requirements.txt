@@ -1,0 +1,9 @@
+aiogram
+asyncpg
+sqlalchemy[asyncio]
+alembic
+python-dotenv
+pytest
+pytz
+Babel
+aiocron
