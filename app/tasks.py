@@ -32,9 +32,11 @@ async def send_battle_notification(bot: Bot):
             username = result.for_user.username
     if username is None:
         await bot.send_message(-1001598872748, f'Стоило бы занять битву.')
+        return
     await bot.send_message(-1001598872748, f'Привет, @{username}.')
 
 
 async def on_startup(bot: Bot):
+    print('secret ==', bot.super_secret)
     await bot.delete_webhook(True)
     await bot.set_webhook(WEBHOOK_URL, secret_token=bot.super_secret)
