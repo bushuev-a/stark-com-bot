@@ -37,4 +37,4 @@ async def send_battle_notification(bot: Bot):
 
 async def on_startup(bot: Bot):
     await bot.delete_webhook(True)
-    await bot.set_webhook(WEBHOOK_URL, secret_token=bot['super_secret'])
+    await bot.set_webhook(WEBHOOK_URL, secret_token=bot.super_secret)
