@@ -8,10 +8,9 @@ from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_applicati
 from aiohttp import web
 from dotenv import load_dotenv
 
-from app.http.gpt_get_schedule import http_get_schedule
-
 load_dotenv()
 
+from app.http.gpt_get_schedule import http_get_schedule
 from app.tasks import send_battle_notification, on_startup
 from app.routes.private import private_router
 from app.routes.commanders_chat import commanders_chat_router
