@@ -37,10 +37,11 @@ async def after_battle():
 
 def main():
     # await bot.delete_webhook(True)
+    bot['super_secret'] = os.urandom(8).hex()
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
         bot=bot,
-        secret_token=BOT_TOKEN,
+        secret_token=bot['super_secret'],
     )
     # Register webhook handler on application
     webhook_requests_handler.register(app, path='/webhook')
